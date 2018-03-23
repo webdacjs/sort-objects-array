@@ -1,0 +1,30 @@
+{
+  "name": "sort-objects-array",
+  "version": "1.0.0",
+  "description": "Simple module to sort an array of objects by a property without mutating the original array.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webdacjs/sort-objects-array.git"
+  },
+  "keywords": [
+    "sort",
+    "array",
+    "object",
+    "order",
+    "sort"
+  ],
+  "author": "Juan Convers",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/webdacjs/sort-objects-array/issues"
+  },
+  "homepage": "https://github.com/webdacjs/sort-objects-array#readme",
+  "devDependencies": {
+    "tap-colorize": "^1.2.0",
+    "tape": "^4.9.0"
+  }
+}
