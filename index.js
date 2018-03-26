@@ -22,7 +22,7 @@ const checkErrors = (arrayToSort, key) => {
     throw new Error ('A property was not provided to use a as sort key')
   }
   if(arrayToSort.filter(x => x[key]).length === 0) {
-    throw new Error (`Property ${key} was not found in any object of the array.`)
+    console.log(`Property ${key} was not found in any object of the array.`)
   }
 }
 

@@ -37,3 +37,12 @@ test('Testing desc sorting by the area property', t => {
   t.equal(countries[0].name, 'Colombia', 'Test original array was not mutated')
   t.end()
 })
+
+test('Testing sorting by non-existing property', t => {
+  t.plan(3)
+  const sortedArray = sortObjectsArray(countries, 'nonexistingproperty')
+  t.equal(sortedArray[0].name, 'Colombia', 'Colombia first result. The order was not changed.')
+  t.equal(sortedArray[3].name, 'Brasil', 'Brasil last result. The order was not changed.')
+  t.equal(countries[0].name, 'Colombia', 'Test original array was not mutated')
+  t.end()
+})
