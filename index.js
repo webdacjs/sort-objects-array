@@ -1,5 +1,5 @@
 const injMissVals = (originalArray, sortedArray, key) => {
-  const miss = originalArray.filter(x => x[key] === undefined)
+  const miss = originalArray.filter(x => !Boolean(x[key]))
   if (miss.length > 0) {
     console.log(`Warn: ${miss.length} missing the '${key}' property`)
     miss.forEach((x) => {
@@ -36,7 +36,7 @@ const checkErrors = (arrayToSort, key) => {
 */
 const sortObjectsArray = (arrayToSort, key, order) => {
   checkErrors(arrayToSort, key)
-  const sortedArray = arrayToSort.filter(x => x[key]).sort(
+  const sortedArray = arrayToSort.filter(x => Boolean(x[key])).sort(
     getSortFunction(order, key)
   )
   injMissVals(arrayToSort, sortedArray, key)
