@@ -1,6 +1,6 @@
 const descwords = ['desc', 'reverse']
 
-// Lodash fiter function released under MIT license.
+// Lodash filter function released under MIT license.
 // https://raw.githubusercontent.com/lodash/lodash/4.17.4/LICENSE
 const filter = (array, predicate) => {
   let index = -1
