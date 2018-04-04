@@ -1,9 +1,25 @@
 const descwords = ['desc', 'reverse']
 
+// Lodash fiter function released under MIT license.
+// https://raw.githubusercontent.com/lodash/lodash/4.17.4/LICENSE
+const filter = (array, predicate) => {
+  let index = -1
+  let resIndex = 0
+  const length = array == null ? 0 : array.length
+  const result = []
+
+  while (++index < length) {
+    const value = array[index]
+    if (predicate(value, index, array)) {
+      result[resIndex++] = value
+    }
+  }
+  return result
+}
+
 const injMissVals = (originalArray, sortedArray, key) => {
-  const miss = originalArray.filter(x => !x[key])
+  const miss = filter(originalArray, x => !x[key])
   if (miss.length > 0) {
-    console.log(`Warn: ${miss.length} missing the '${key}' property`)
     miss.forEach((x) => {
       sortedArray.push(x)
     })
@@ -39,18 +55,6 @@ const getCaseSensitivity = (params) => {
   }
 }
 
-const checkErrors = (arrayToSort, key) => {
-  if (!Array.isArray(arrayToSort)) {
-    throw new Error('An array was noy provided to perform the sort')
-  }
-  if (typeof key !== 'string') {
-    throw new Error('A property was not provided to use a as sort key')
-  }
-  if (arrayToSort.filter(x => x[key]).length === 0) {
-    console.log(`Property ${key} was not found in any object of the array.`)
-  }
-}
-
 /**
  * Sort an objects array based on the property required in the parameters.
  *
@@ -62,14 +66,18 @@ const checkErrors = (arrayToSort, key) => {
  * @returns {Array}
 */
 const sortObjectsArray = (arrayToSort, key, orderOrConfig) => {
-  const order = getSortOrder(orderOrConfig)
-  const caseSensitivity = getCaseSensitivity(orderOrConfig)
-  checkErrors(arrayToSort, key)
-  const sortedArray = arrayToSort.filter(x => Boolean(x[key])).sort(
-    getSortFunction(order, key, caseSensitivity)
-  )
-  injMissVals(arrayToSort, sortedArray, key)
-  return sortedArray
+  if (!Array.isArray(arrayToSort) || typeof key !== 'string') {
+    console.log('* sort-objects-array: Wrong arguments returning original array')
+    return arrayToSort
+  } else {
+    const order = getSortOrder(orderOrConfig)
+    const caseSensitivity = getCaseSensitivity(orderOrConfig)
+    const sortedArray = filter(arrayToSort, x => Boolean(x[key])).sort(
+      getSortFunction(order, key, caseSensitivity)
+    )
+    injMissVals(arrayToSort, sortedArray, key)
+    return sortedArray
+  }
 }
 
 module.exports = sortObjectsArray

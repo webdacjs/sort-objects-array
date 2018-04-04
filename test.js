@@ -90,3 +90,20 @@ test('Testing sorting by non-existing property', t => {
   t.equal(countries.length, sortedArray.length, 'Test original and sorted array have the same length')
   t.end()
 })
+
+test('Testing sorting a non-array property', t => {
+  t.plan(1)
+  const sortedArray = sortObjectsArray({'test': 10}, 'nonexistingproperty')
+  t.equal(sortedArray.test, 10, 'Method non-executed returning original object.')
+  t.end()
+})
+
+test('Testing sorting by with missing property to sort', t => {
+  t.plan(4)
+  const sortedArray = sortObjectsArray(countries)
+  t.equal(sortedArray[0].name, 'Colombia', 'Colombia first result. The order was not changed.')
+  t.equal(sortedArray[4].name, 'Brasil', 'Brasil third result. The order was not changed.')
+  t.equal(countries[0].name, 'Colombia', 'Test original array was not mutated')
+  t.equal(countries.length, sortedArray.length, 'Test original and sorted array have the same length')
+  t.end()
+})
