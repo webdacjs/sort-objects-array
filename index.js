@@ -10,7 +10,7 @@ const injMissVals = (originalArray, sortedArray, key) => {
   }
 }
 
-const getLowerCaseValue = (val) => {
+const getLowCasVal = (val) => {
   return String(val).toLowerCase()
 }
 
@@ -19,8 +19,8 @@ const getSortFunction = (order, key, casesensitive) => {
   if (order === 'desc') i = [1, -1, 0]
   if (casesensitive === true) {
     return (a, b) => (
-    getLowerCaseValue(a[key]) < getLowerCaseValue(b[key])) ? i[0] : (
-      (getLowerCaseValue(b[key]) < getLowerCaseValue(a[key])) ? i[1] : i[2])
+    getLowCasVal(a[key]) < getLowCasVal(b[key])) ? i[0] : (
+      (getLowCasVal(b[key]) < getLowCasVal(a[key])) ? i[1] : i[2])
   }
   return (a, b) => (a[key] < b[key]) ? i[0] : ((b[key] < a[key]) ? i[1] : i[2])
 }
