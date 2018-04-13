@@ -26,9 +26,9 @@ const getSortFunction = (order, key, casesensitive) => {
 }
 
 const getSortOrder = (params) => {
-  if (typeof (params) === 'string' && descwords.includes(params)) {
+  if (typeof (params) === 'string' && descwords.indexOf(params) > -1) {
     return 'desc'
-  } else if (typeof (params) === 'object' && descwords.includes(params.order)) {
+  } else if (typeof (params) === 'object' && descwords.indexOf(params.order) > -1) {
     return 'desc'
   }
 }
