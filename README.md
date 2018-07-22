@@ -1,6 +1,6 @@
 # sort-objects-array
 
-This tiny and fast module performs the sort of an Array of objects with the property required. The module returns a new copy of the array so the original is not mutated. The module even support the sort objects (but they get transformed to and array of objects first)
+This tiny and fast module performs the sort of an Array of objects with the property required. The module returns a new copy of the array so the original is not mutated. The module even support the sort objects (but they get transformed to an array of objects first)
 
 The module doesn't have any external dependencies (only tape to run the tests).
 
