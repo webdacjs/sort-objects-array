@@ -1,6 +1,8 @@
 # sort-objects-array
 
-This tiny and fast module performs the sort of an Array of objects with the property required. The module returns a new copy of the array so the original is not mutated. The module doesn't have any external dependencies (only tape to run the tests).
+This tiny and fast module performs the sort of an Array of objects with the property required. The module returns a new copy of the array so the original is not mutated. The module even support the sort objects (but they get transformed to and array of objects first)
+
+The module doesn't have any external dependencies (only tape to run the tests).
 
 ## Install
 
@@ -86,6 +88,30 @@ sortObjectsArray(countries, 'name', {order: 'desc', caseinsensitive: true});
 //   { name: 'canada', 'code': 'ca', 'area': 9984670},
 //   { name: 'Brasil', code: 'br', area: 8511965 },
 //   { name: 'Argentina', code: 'ar', area: 2766890 } ]
+
+```
+
+Finally it can sort objects, converting them first to an array of objects using 'key' and 'value' in each item:
+
+```js
+
+// Example6: Sorting by an object by value
+
+const countriesObj = {
+    Colombia: 1197411,
+    Argentina: 2766890,
+    canada: 9984670,
+    NonExistingCountry: null,
+    Brasil: 8511965
+}
+
+sortObjectsArray(countriesObj, 'value', {order: 'desc'});
+// Returns
+// [ { key: 'canada', value: 9984670 },
+//   { key: 'Brasil', value: 8511965 },
+//   { key: 'Argentina', value: 2766890 },
+//   { key: 'Colombia', value: 1197411 },
+//   { key: 'NonExistingCountry', value: null } ]
 
 ```
 

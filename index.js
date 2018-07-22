@@ -1,6 +1,6 @@
 const filter = require('./filter.js')
-const {injMissVals, getSortFunction,
-  getSortOrder, getCaseSensitivity} = require('./getsortutils.js')
+const {injMissVals, getSortFunction, getSortOrder,
+    getCaseSensitivity, isAnObject, objToArray} = require('./getsortutils.js')
 
 /**
  * Sort an objects array based on the property required in the parameters.
@@ -12,11 +12,12 @@ const {injMissVals, getSortFunction,
  *      caseinsensitive flag.
  * @returns {Array}
 */
-const sortObjectsArray = (arrayToSort, key, orderOrConfig) => {
-  if (!Array.isArray(arrayToSort) || typeof key !== 'string') {
-    console.log('* sort-objects-array: Wrong arguments returning original array')
-    return arrayToSort
-  } else {
+const sortObjectsArray = (valueToSort, key, orderOrConfig) => {
+    const arrayToSort = isAnObject(valueToSort) ? objToArray(valueToSort) : valueToSort
+    if (!Array.isArray(arrayToSort) || typeof key !== 'string') {
+        console.log('* sort-objects-array: Wrong arguments returning original array')
+        return arrayToSort
+    }
     const order = getSortOrder(orderOrConfig)
     const caseSensitivity = getCaseSensitivity(orderOrConfig)
     const sortedArray = filter(arrayToSort, x => Boolean(x[key])).sort(
@@ -24,7 +25,7 @@ const sortObjectsArray = (arrayToSort, key, orderOrConfig) => {
     )
     injMissVals(arrayToSort, sortedArray, key)
     return sortedArray
-  }
+
 }
 
 module.exports = sortObjectsArray
