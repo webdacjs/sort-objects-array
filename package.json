@@ -24,7 +24,6 @@
   },
   "homepage": "https://github.com/webdacjs/sort-objects-array#readme",
   "devDependencies": {
-    "tap-colorize": "^1.2.0",
-    "tape": "^4.9.0"
+    "jest": "^23.6.0"
   }
 }
