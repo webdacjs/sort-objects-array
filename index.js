@@ -1,6 +1,6 @@
 const filter = require('./filter.js')
 const {injMissVals, getSortFunction, getSortOrder,
-    getCaseSensitivity, isAnObject, objToArray} = require('./getsortutils.js')
+  getCaseSensitivity, isAnObject, objToArray} = require('./getsortutils.js')
 
 /**
  * Sort an objects array based on the property required in the parameters.
@@ -21,8 +21,8 @@ const sortObjectsArray = (valueToSort, key, orderOrConfig) => {
   const order = getSortOrder(orderOrConfig)
   const caseSensitivity = getCaseSensitivity(orderOrConfig)
   const sortedArray = filter(arrayToSort, x => Boolean(x[key])).sort(
-      getSortFunction(order, key, caseSensitivity)
-    )
+    getSortFunction(order, key, caseSensitivity)
+  )
   return injMissVals(arrayToSort, sortedArray, key)
 }
 
