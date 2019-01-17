@@ -13,19 +13,18 @@ const {injMissVals, getSortFunction, getSortOrder,
  * @returns {Array}
 */
 const sortObjectsArray = (valueToSort, key, orderOrConfig) => {
-    const arrayToSort = isAnObject(valueToSort) ? objToArray(valueToSort) : valueToSort
-    if (!Array.isArray(arrayToSort) || typeof key !== 'string') {
-        console.log('* sort-objects-array: Wrong arguments returning original array')
-        return arrayToSort
-    }
-    const order = getSortOrder(orderOrConfig)
-    const caseSensitivity = getCaseSensitivity(orderOrConfig)
-    const sortedArray = filter(arrayToSort, x => Boolean(x[key])).sort(
+  const arrayToSort = isAnObject(valueToSort) ? objToArray(valueToSort) : valueToSort
+  if (!Array.isArray(arrayToSort) || typeof key !== 'string') {
+    console.log('* sort-objects-array: Wrong arguments returning original array')
+    return arrayToSort
+  }
+  const order = getSortOrder(orderOrConfig)
+  const caseSensitivity = getCaseSensitivity(orderOrConfig)
+  const sortedArray = filter(arrayToSort, x => Boolean(x[key])).sort(
       getSortFunction(order, key, caseSensitivity)
     )
-    injMissVals(arrayToSort, sortedArray, key)
-    return sortedArray
-
+  injMissVals(arrayToSort, sortedArray, key)
+  return sortedArray
 }
 
 module.exports = sortObjectsArray
