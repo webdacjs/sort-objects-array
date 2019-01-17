@@ -23,8 +23,7 @@ const sortObjectsArray = (valueToSort, key, orderOrConfig) => {
   const sortedArray = filter(arrayToSort, x => Boolean(x[key])).sort(
       getSortFunction(order, key, caseSensitivity)
     )
-  injMissVals(arrayToSort, sortedArray, key)
-  return sortedArray
+  return injMissVals(arrayToSort, sortedArray, key)
 }
 
 module.exports = sortObjectsArray
