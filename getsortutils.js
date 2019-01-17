@@ -10,7 +10,7 @@ const getMissingVals = (originalArray, key) => filter(originalArray, x => !x[key
 const injMissVals = (originalArray, sortedArray, key) => {
   const miss = getMissingVals(originalArray, key)
   return miss.length > 0
-    ? [...sortedArray, ...miss]
+    ? sortedArray.concat(miss)
     : sortedArray
 }
 
@@ -18,15 +18,15 @@ const getLowCasVal = (val) => String(val).toLowerCase()
 
 const getSortArray = order => order === 'desc' ? [1, -1, 0] : [-1, 1, 0]
 
-const getSortFunctionInsensitive = i => (a, b) => (
+const getSortFunctionInsensitive = (i, key) => (a, b) => (
         getLowCasVal(a[key]) < getLowCasVal(b[key])) ? i[0] : (
         (getLowCasVal(b[key]) < getLowCasVal(a[key])) ? i[1] : i[2])
 
-const getSortFunctionStandard = i => (a, b) => (a[key] < b[key]) ? i[0] : ((b[key] < a[key]) ? i[1] : i[2])
+const getSortFunctionStandard = (i, key) => (a, b) => (a[key] < b[key]) ? i[0] : ((b[key] < a[key]) ? i[1] : i[2])
 
 const getSortFunction = (order, key, casesensitive) => casesensitive === true
-  ? getSortFunctionInsensitive(getSortArray(order))
-  : getSortFunctionStandard(getSortArray(order))
+  ? getSortFunctionInsensitive(getSortArray(order), key)
+  : getSortFunctionStandard(getSortArray(order), key)
 
 const getSortOrder = params => typeof (params) === 'string' && descwords.indexOf(params) > -1
   ? 'desc'
