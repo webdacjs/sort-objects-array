@@ -3,6 +3,8 @@ const filter = require('./filter.js')
 
 const isAnObject = val => !(val === null || val.constructor.name.toLowerCase() !== 'object')
 
+const isString = val => typeof (val) === 'string'
+
 const objToArray = val => Object.keys(val).map(x => ({key: x, value: val[x]}))
 
 const getMissingVals = (originalArray, key) => filter(originalArray, x => !x[key])
@@ -28,7 +30,7 @@ const getSortFunction = (order, key, casesensitive) => casesensitive === true
   ? getSortFunctionInsensitive(getSortArray(order), key)
   : getSortFunctionStandard(getSortArray(order), key)
 
-const getSortOrder = params => typeof (params) === 'string' && descwords.indexOf(params) > -1
+const getSortOrder = params => isString(params) && descwords.indexOf(params) > -1
   ? 'desc'
   : typeof (params) === 'object' && descwords.indexOf(params.order) > -1
     ? 'desc'
