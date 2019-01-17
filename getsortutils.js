@@ -5,6 +5,8 @@ const isAnObject = val => !(val === null || val.constructor.name.toLowerCase() !
 
 const isString = val => typeof (val) === 'string'
 
+const isObject = val => typeof (val) === 'object'
+
 const objToArray = val => Object.keys(val).map(x => ({key: x, value: val[x]}))
 
 const getMissingVals = (originalArray, key) => filter(originalArray, x => !x[key])
@@ -21,10 +23,11 @@ const getLowCasVal = (val) => String(val).toLowerCase()
 const getSortArray = order => order === 'desc' ? [1, -1, 0] : [-1, 1, 0]
 
 const getSortFunctionInsensitive = (i, key) => (a, b) => (
-        getLowCasVal(a[key]) < getLowCasVal(b[key])) ? i[0] : (
-        (getLowCasVal(b[key]) < getLowCasVal(a[key])) ? i[1] : i[2])
+  getLowCasVal(a[key]) < getLowCasVal(b[key])) ? i[0] : (
+    (getLowCasVal(b[key]) < getLowCasVal(a[key])) ? i[1] : i[2])
 
-const getSortFunctionStandard = (i, key) => (a, b) => (a[key] < b[key]) ? i[0] : ((b[key] < a[key]) ? i[1] : i[2])
+const getSortFunctionStandard = (i, key) => (a, b) => (a[key] < b[key])
+  ? i[0] : ((b[key] < a[key]) ? i[1] : i[2])
 
 const getSortFunction = (order, key, casesensitive) => casesensitive === true
   ? getSortFunctionInsensitive(getSortArray(order), key)
@@ -32,11 +35,11 @@ const getSortFunction = (order, key, casesensitive) => casesensitive === true
 
 const getSortOrder = params => isString(params) && descwords.indexOf(params) > -1
   ? 'desc'
-  : typeof (params) === 'object' && descwords.indexOf(params.order) > -1
+  : isObject(params) && descwords.indexOf(params.order) > -1
     ? 'desc'
     : undefined
 
-const getCaseSensitivity = params => typeof (params) === 'object' && params.caseinsensitive === true
+const getCaseSensitivity = params => isObject(params) && params.caseinsensitive
 
 module.exports = {
   isAnObject,
