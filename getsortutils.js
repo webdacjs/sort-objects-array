@@ -41,11 +41,22 @@ const getSortOrder = params => isString(params) && descwords.indexOf(params) > -
 
 const getCaseSensitivity = params => isObject(params) && params.caseinsensitive
 
+const validateArgs = (arr, key) => !Array.isArray(arr) || !isString(key)
+
+const getSortedArray = (arrayToSort, key, orderOrConfig) => filter(arrayToSort,
+  x => Boolean(x[key])).sort(
+  getSortFunction(
+    getSortOrder(orderOrConfig), key, getCaseSensitivity(orderOrConfig)
+  )
+)
+
 module.exports = {
   isAnObject,
   objToArray,
   injMissVals,
   getSortFunction,
   getSortOrder,
-  getCaseSensitivity
+  getCaseSensitivity,
+  validateArgs,
+  getSortedArray
 }
