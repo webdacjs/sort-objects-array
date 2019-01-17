@@ -125,5 +125,5 @@ $ npm install && npm test
 
 ### License
 
-Copyright © 2018, [Juan Convers](https://github.com/webdacjs).
+Copyright © 2018, [Juan Convers](https://juanconvers.com).
 Released under the [MIT License](LICENSE).
