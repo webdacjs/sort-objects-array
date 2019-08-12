@@ -1,7 +1,7 @@
 const ch = require('console-hue')
+const {isAnObject} = require('./typeCheck')
 const {
   injMissVals,
-  isAnObject,
   objToArray,
   validateArgs,
   getSortedArray

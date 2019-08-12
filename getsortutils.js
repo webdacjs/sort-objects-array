@@ -1,11 +1,6 @@
 const descwords = ['desc', 'reverse']
 const filter = require('lodash.filter')
-
-const isAnObject = val => !(val === null || val.constructor.name.toLowerCase() !== 'object')
-
-const isString = val => typeof (val) === 'string'
-
-const isObject = val => typeof (val) === 'object'
+const {isString, isObject} = require('./typeCheck')
 
 const objToArray = val => Object.keys(val).map(x => ({key: x, value: val[x]}))
 
@@ -51,7 +46,6 @@ const getSortedArray = (arrayToSort, key, orderOrConfig) => filter(arrayToSort,
 )
 
 module.exports = {
-  isAnObject,
   objToArray,
   injMissVals,
   getSortFunction,
