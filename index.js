@@ -1,11 +1,11 @@
 const ch = require('console-hue')
-const {isAnObject} = require('./typeCheck')
-const validateArgs = require('./validateArgs')
+const {isAnObject} = require('./utils/typeCheck')
+const validateArgs = require('./utils/validateArgs')
 const {
   injMissVals,
   objToArray,
   getSortedArray
-} = require('./getsortutils.js')
+} = require('./utils/getsortutils.js')
 
 /**
  * Sort an objects array based on the property required in the parameters.
