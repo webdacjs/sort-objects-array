@@ -1,9 +1,9 @@
 const ch = require('console-hue')
 const {isAnObject} = require('./typeCheck')
+const validateArgs = require('./validateArgs')
 const {
   injMissVals,
   objToArray,
-  validateArgs,
   getSortedArray
 } = require('./getsortutils.js')
 
