@@ -27,6 +27,7 @@
     "jest": "^23.6.0"
   },
   "dependencies": {
-    "console-hue": "^1.0.2"
+    "console-hue": "^1.0.2",
+    "lodash.filter": "^4.6.0"
   }
 }

@@ -1,5 +1,5 @@
 const descwords = ['desc', 'reverse']
-const filter = require('./filter.js')
+const filter = require('lodash.filter')
 
 const isAnObject = val => !(val === null || val.constructor.name.toLowerCase() !== 'object')
 
