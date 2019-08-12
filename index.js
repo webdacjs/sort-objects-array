@@ -1,3 +1,4 @@
+const ch = require('console-hue')
 const {
   injMissVals,
   isAnObject,
@@ -19,8 +20,8 @@ const {
 const sortObjectsArray = (valueToSort, key, orderOrConfig) => {
   const arrayToSort = isAnObject(valueToSort) ? objToArray(valueToSort) : valueToSort
   if (validateArgs(arrayToSort, key)) {
-    console.log('* sort-objects-array: Wrong arguments returning original array')
-    return arrayToSort
+    ch.warn('* sort-objects-array: Wrong arguments returning original array / object')
+    return valueToSort
   }
   return injMissVals(
     arrayToSort,
