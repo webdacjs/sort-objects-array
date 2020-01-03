@@ -24,10 +24,10 @@
   },
   "homepage": "https://github.com/webdacjs/sort-objects-array#readme",
   "devDependencies": {
-    "jest": "^23.6.0"
+    "jest": "23.6.0"
   },
   "dependencies": {
-    "console-hue": "^1.0.2",
-    "lodash.filter": "^4.6.0"
+    "console-hue": "1.0.3",
+    "lodash.filter": "4.6.0"
   }
 }
