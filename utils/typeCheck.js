@@ -3,15 +3,15 @@ function isAnObject (val) {
 }
 
 function isString (val) {
-  return typeof (val) === 'string'  
-} 
+  return typeof (val) === 'string'
+}
 
 function isObject (val) {
-    return typeof (val) === 'object'
+  return typeof (val) === 'object'
 }
 
 module.exports = {
-    isAnObject,
-    isString,
-    isObject
+  isAnObject,
+  isString,
+  isObject
 }

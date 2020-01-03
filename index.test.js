@@ -3,11 +3,11 @@ const sortObjectsArray = require('./index.js')
 
 // Objects Array to test.
 const countries = [
-      {'name': 'Colombia', 'code': 'co', 'area': 1197411},
-      {'name': 'Argentina', 'code': 'ar', 'area': 2766890},
-      {'name': 'canada', 'code': 'ca', 'area': 9984670},
-      {'name': 'NonExistingCountry'},
-      {'name': 'Brasil', 'code': 'br', 'area': 8511965}
+  { name: 'Colombia', code: 'co', area: 1197411 },
+  { name: 'Argentina', code: 'ar', area: 2766890 },
+  { name: 'canada', code: 'ca', area: 9984670 },
+  { name: 'NonExistingCountry' },
+  { name: 'Brasil', code: 'br', area: 8511965 }
 ]
 
 const countriesObj = {
@@ -29,7 +29,6 @@ test('Testing normal sorting of the array by name property', () => {
   expect(countries.length).toBe(sortedArray.length)
 })
 
-
 test('Testing desc sorting by the area property', () => {
   expect.assertions(7)
   const sortedArray = sortObjectsArray(countries, 'area', 'desc')
@@ -44,7 +43,7 @@ test('Testing desc sorting by the area property', () => {
 //
 test('Testing desc sorting by the area property passing a configuration object with order', () => {
   expect.assertions(7)
-  const sortedArray = sortObjectsArray(countries, 'area', {order: 'desc'})
+  const sortedArray = sortObjectsArray(countries, 'area', { order: 'desc' })
   expect(sortedArray[0].name).toBe('canada')
   expect(sortedArray[1].name).toBe('Brasil')
   expect(sortedArray[2].name).toBe('Argentina')
@@ -56,7 +55,7 @@ test('Testing desc sorting by the area property passing a configuration object w
 
 test('Testing desc sorting by the area property passing a configuration object with order and case insensivity', () => {
   expect.assertions(7)
-  const sortedArray = sortObjectsArray(countries, 'area', {order: 'desc', caseinsensitive: true})
+  const sortedArray = sortObjectsArray(countries, 'area', { order: 'desc', caseinsensitive: true })
   expect(sortedArray[0].name).toBe('canada')
   expect(sortedArray[1].name).toBe('Brasil')
   expect(sortedArray[2].name).toBe('Argentina')
@@ -68,7 +67,7 @@ test('Testing desc sorting by the area property passing a configuration object w
 
 test('Testing normal sorting of the array by name property passing a caseinsensitive flag', () => {
   expect.assertions(6)
-  const sortedArray = sortObjectsArray(countries, 'name', {caseinsensitive: true})
+  const sortedArray = sortObjectsArray(countries, 'name', { caseinsensitive: true })
   expect(sortedArray[0].name).toBe('Argentina')
   expect(sortedArray[1].name).toBe('Brasil')
   expect(sortedArray[2].name).toBe('canada')

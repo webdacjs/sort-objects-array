@@ -1,8 +1,8 @@
 const descwords = ['desc', 'reverse']
 const filter = require('lodash.filter')
-const {isString, isObject} = require('./typeCheck')
+const { isString, isObject } = require('./typeCheck')
 
-const objToArray = val => Object.keys(val).map(x => ({key: x, value: val[x]}))
+const objToArray = val => Object.keys(val).map(x => ({ key: x, value: val[x] }))
 
 const getMissingVals = (originalArray, key) => filter(originalArray, x => !x[key])
 
@@ -37,7 +37,7 @@ const getSortOrder = params => isString(params) && descwords.indexOf(params) > -
 const getCaseSensitivity = params => isObject(params) && params.caseinsensitive
 
 function getSortedArray (arrayToSort, key, orderOrConfig) {
-  const sortFunction =  getSortFunction(
+  const sortFunction = getSortFunction(
     getSortOrder(orderOrConfig), key, getCaseSensitivity(orderOrConfig))
   return filter(arrayToSort, x => Boolean(x[key])).sort(sortFunction)
 }
