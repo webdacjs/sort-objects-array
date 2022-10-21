@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/webdacjs/sort-objects-array#readme",
   "devDependencies": {
-    "jest": "23.6.0"
+    "jest": "29.2.1"
   },
   "dependencies": {
     "console-hue": "1.0.3",
