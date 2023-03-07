@@ -49,6 +49,17 @@ sortObjectsArray(countries, 'area', 'desc');
 
 If you prefer you can pass the order as a configuration object using the **order**
 property:
+
+```js
+// Example3: Sorting the countries by the largest area using config object.
+sortObjectsArray(countries, 'area', {order: 'desc'});
+// Returns
+// [ { name: 'canada', 'code': 'ca', 'area': 9984670},
+//   { name: 'Brasil', code: 'br', area: 8511965 },
+//   { name: 'Argentina', code: 'ar', area: 2766890 },
+//   { name: 'Colombia', code: 'co', area: 1197411 } ]
+```
+
 By default, the module respects the case sensitivity of the values. If you want to override it and ignore it you can pass the flag ***caseinsensitive*** in the configuration object.
 
 ```js
