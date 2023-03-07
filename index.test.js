@@ -1,3 +1,5 @@
+import { expect, test } from 'vitest'
+
 // Modules loaded for testing.
 const sortObjectsArray = require('./index.js')
 
