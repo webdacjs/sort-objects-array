@@ -4,7 +4,7 @@
   "description": "Simple module to sort an array of objects by a property without mutating the original array.",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "vitest"
   },
   "repository": {
     "type": "git",
@@ -18,17 +18,15 @@
     "sort"
   ],
   "author": "Juan Convers",
-  "publishConfig": { "registry": "https://npm.pkg.github.com/webdacjs" },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/webdacjs"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/webdacjs/sort-objects-array/issues"
   },
   "homepage": "https://github.com/webdacjs/sort-objects-array#readme",
   "devDependencies": {
-    "jest": "23.6.0"
-  },
-  "dependencies": {
-    "console-hue": "1.0.3",
-    "lodash.filter": "4.6.0"
+    "vitest": "^0.29.2"
   }
 }
