@@ -1,12 +1,12 @@
 # sort-objects-array
 
-This tiny and fast module performs the sort of an Array of objects with the property required. The module returns a new copy of the array so the original is not mutated. The module even support the sort objects (but they get transformed to an array of objects first)
+This tiny and fast module performs the sort of an Array of objects with the property required. The module returns a new copy of the array so the original is not mutated. The module even supports the sort objects (but they get transformed into an array of objects first)
 
-The only dependencies this module have is jest to run the tests and [console-hue](https://www.npmjs.com/package/console-hue)
+The only dependency this module has is `vitest` to run the tests
 
 ## Install
 
-You can install with [npm]:
+You can install it with npm:
 
 ```sh
 $ npm install --save sort-objects-array
@@ -51,9 +51,7 @@ If you prefer you can pass the order as a configuration object using the **order
 property:
 
 ```js
-
 // Example3: Sorting the countries by the largest area using config object.
-
 sortObjectsArray(countries, 'area', {order: 'desc'});
 // Returns
 // [ { name: 'canada', 'code': 'ca', 'area': 9984670},
@@ -62,7 +60,7 @@ sortObjectsArray(countries, 'area', {order: 'desc'});
 //   { name: 'Colombia', code: 'co', area: 1197411 } ]
 ```
 
-By default the module respects the case sensitivity of the values. If you want to override it and ignore it you can pass the flag ***caseinsensitive*** in the configuration object.
+By default, the module respects the case sensitivity of the values. If you want to override it and ignore it you can pass the flag ***caseinsensitive*** in the configuration object.
 
 ```js
 
@@ -125,5 +123,5 @@ $ npm install && npm test
 
 ### License
 
-Copyright © 2018, [Juan Convers](https://juanconvers.com).
+Copyright © 2023, [Juan Convers](https://juanconvers.com).
 Released under the [MIT License](LICENSE).

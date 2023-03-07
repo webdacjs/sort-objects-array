@@ -1,7 +1,5 @@
-const filter = require('lodash.filter')
-
 function getMissingVals (originalArray, key) {
-  return filter(originalArray, x => !x[key])
+  return originalArray.filter(x => !x[key])
 }
 
 module.exports = function (originalArray, sortedArray, key) {

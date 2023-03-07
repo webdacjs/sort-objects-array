@@ -1,4 +1,3 @@
-const ch = require('console-hue')
 const { isAnObject } = require('./utils/typeCheck')
 const validateArgs = require('./utils/validateArgs')
 const injectMissingValues = require('./utils/injectMissing')
@@ -17,7 +16,7 @@ const { objToArray, getSortedArray } = require('./utils/getsortutils.js')
 function sortObjectsArray (valueToSort, key, orderOrConfig) {
   const arrayToSort = isAnObject(valueToSort) ? objToArray(valueToSort) : valueToSort
   if (validateArgs(arrayToSort, key)) {
-    ch.warn('* sort-objects-array: Wrong arguments returning original array / object')
+    console.log('* sort-objects-array: Wrong arguments returning original array / object')
     return valueToSort
   }
   return injectMissingValues(
