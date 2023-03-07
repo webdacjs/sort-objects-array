@@ -1,6 +1,6 @@
 {
   "name": "@webdacjs/sort-objects-array",
-  "version": "1.7.1",
+  "version": "2.0.0",
   "description": "Simple module to sort an array of objects by a property without mutating the original array.",
   "main": "index.js",
   "scripts": {
