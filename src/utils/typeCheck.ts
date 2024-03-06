@@ -1,17 +1,11 @@
-function isAnObject (val) {
+export function isAnObject (val: any) {
   return !(val === null || val.constructor.name.toLowerCase() !== 'object')
 }
 
-function isString (val) {
+export function isString (val: any) {
   return typeof (val) === 'string'
 }
 
-function isObject (val) {
+export function isObject (val: any) {
   return typeof (val) === 'object'
-}
-
-module.exports = {
-  isAnObject,
-  isString,
-  isObject
 }

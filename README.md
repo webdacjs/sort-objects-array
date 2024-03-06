@@ -123,5 +123,5 @@ $ npm install && npm test
 
 ### License
 
-Copyright © 2023, [Juan Convers](https://juanconvers.com).
+Copyright © 2024, [Juan Convers](https://juanconvers.com).
 Released under the [MIT License](LICENSE).
