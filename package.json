@@ -7,12 +7,11 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Simple module to sort an array of objects by a property without mutating the original array.",
   "scripts": {
     "test": "vitest",
     "build": "tsup src/index.ts --format cjs,esm --dts"
-
   },
   "repository": {
     "type": "git",
