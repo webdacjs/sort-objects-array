@@ -119,10 +119,27 @@ test('Testing sorting repeated fields', () => {
 test('Testing sorting array of arrays', () => {
   expect.assertions(5)
   const sortedArray = sortObjectsArray([countries, countries], 'area',  { flatten: true, order: 'desc' })
-  console.log(sortedArray)
   expect(sortedArray[0].name).toBe('canada')
   expect(sortedArray[0].area).toBe(9984670)
   expect(sortedArray[1].name).toBe('canada')
   expect(sortedArray[1].area).toBe(9984670)
   expect([...countries, ...countries].length).toBe(sortedArray.length)
+})
+
+test('Testing sorting array of arrays', () => {
+  expect.assertions(5)
+  const sortedArray = sortObjectsArray([countries, countries], 'area',  { order: 'desc' })
+  expect(sortedArray[0][0].name).toBe('canada')
+  expect(sortedArray[0][0].area).toBe(9984670)
+  expect(sortedArray[1][0].name).toBe('canada')
+  expect(sortedArray[1][0].area).toBe(9984670)
+  expect([countries, countries].length).toBe(sortedArray.length)
+})
+
+test('Testing sorting array of arrays ommiting config object', () => {
+  expect.assertions(3)
+  const sortedArray = sortObjectsArray([countries, countries], 'name')
+  expect(sortedArray[0][0].name).toBe('Argentina')
+  expect(sortedArray[1][0].name).toBe('Argentina')
+  expect([countries, countries].length).toBe(sortedArray.length)
 })

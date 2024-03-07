@@ -9,3 +9,7 @@ export function isString (val: any) {
 export function isObject (val: any) {
   return typeof (val) === 'object'
 }
+
+export function isArrayofArrays (input: any): boolean {
+  return Array.isArray(input) && input.every((element: any) => Array.isArray(element)); 
+}

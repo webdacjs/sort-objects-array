@@ -1,24 +1,21 @@
-import { isAnObject } from './utils/typeCheck';
 import validateArgs from './utils/validateArgs';
 import injectMissingValues from './utils/injectMissing';
-import { objToArray, getSortedArray, configParams } from './utils/getsortutils';
+import { getSortedArray, configParams } from './utils/getsortutils';
 import getArrayToSort from './utils/getArrayToSort';
+import { isArrayofArrays, isAnObject } from './utils/typeCheck';
 
 /**
- * Sort an objects array based on the property required in the parameters.
- *
- * @param {Array} valueToSort - source array or object to sort
- * @param {string} key - name of property to use in the sort.
- * @param {string or object} order or config - optional 'desc' or 'reverse' string
- *      to indicate sort descending or configuration object with order and / or
- *      caseinsensitive flag.
- * @returns {Array}
+ * Sorts an array of objects based on a specified key and order or configuration.
+ * 
+ * @param valueToSort - The value to sort, which can be an array of objects or an array of arrays.
+ * @param key - The key to sort the objects by.
+ * @param orderOrConfig - The order or configuration to use for sorting.
+ * 
+ * @returns The sorted array of objects.
  */
 function sortObjectsArray(valueToSort: any, key: string, orderOrConfig: configParams) {
   
-  // Use type assertion to specify the expected type
-  const orderConfig = orderOrConfig as configParams;
-  
+  const orderConfig = orderOrConfig as configParams;  
   const arrayToSort = getArrayToSort(valueToSort, orderConfig);
   
   if (validateArgs(arrayToSort, key)) {
@@ -26,7 +23,6 @@ function sortObjectsArray(valueToSort: any, key: string, orderOrConfig: configPa
     return valueToSort;
   }
   
-  // @ts-ignore
   const sortedArray = getSortedArray(arrayToSort, key, orderConfig)
 
   return injectMissingValues(
@@ -36,4 +32,23 @@ function sortObjectsArray(valueToSort: any, key: string, orderOrConfig: configPa
   );
 }
 
-export default sortObjectsArray;
+/**
+ * Sorts an array of objects based on a specified key and order or configuration.
+ * If the value to sort is an array of arrays and the order or configuration is an object with `flatten` set to `false`,
+ * it will recursively sort each inner array.
+ * 
+ * @param valueToSort - The value to sort, which can be an array of objects or an array of arrays.
+ * @param key - The key to sort the objects by.
+ * @param orderOrConfig - The order or configuration to use for sorting.
+ * 
+ * @returns The sorted array of objects.
+ */
+function sortObjectsArrayWrapper(valueToSort: any, key: string, orderOrConfig: configParams) {
+  if (isArrayofArrays(valueToSort) && (!orderOrConfig || (isAnObject(orderOrConfig) && !orderOrConfig.flatten))) {
+    return valueToSort.map((x: any) => sortObjectsArray(x, key, orderOrConfig));
+  } else {
+    return sortObjectsArray(valueToSort, key, orderOrConfig);
+  }
+}
+
+export default sortObjectsArrayWrapper;
