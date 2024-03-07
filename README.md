@@ -2,7 +2,7 @@
 
 This tiny and fast module performs the sort of an Array of objects with the property required. The module returns a new copy of the array so the original is not mutated. The module even supports the sort objects (but they get transformed into an array of objects first)
 
-The only dependency this module has is `vitest` to run the tests
+This module only has dev dependencies (`vitest`, `tsup`, `typescript`) to run the tests and develop in TS.g
 
 ## Install
 
@@ -89,7 +89,7 @@ sortObjectsArray(countries, 'name', {order: 'desc', caseinsensitive: true});
 
 ```
 
-Finally it can sort objects, converting them first to an array of objects using 'key' and 'value' in each item:
+It can also sort objects, converting them first to an array of objects using 'key' and 'value' in each item:
 
 ```js
 
@@ -113,6 +113,36 @@ sortObjectsArray(countriesObj, 'value', {order: 'desc'});
 
 ```
 
+Finally it can also sort an array of arrays, flattening or not based on your needs:
+
+```js
+
+// Example7: Sorting the countries im an array of arrays
+
+const countries = [{'name': 'Colombia', 'code': 'co', 'area': 1197411},
+                   {'name': 'Argentina', 'code': 'ar', 'area': 2766890},
+                   {'name': 'Brasil', 'code': 'br', 'area': 8511965},
+                   {'name': 'canada', 'code': 'ca', 'area': 9984670}]
+
+const countriesCountries = [countries, countries]
+
+sortObjectsArray(countriesCountries, 'name');
+// Returns
+// [ [{ name: 'Argentina', code: 'ar', area: 2766890 }, ...],
+//   [{ name: 'Argentina', code: 'ar', area: 2766890 }, ...]
+// ]
+
+// Example8: Sorting the countries im an array of arrays flattening them
+
+sortObjectsArray(countriesCountries, 'area', { flatten: true, order: 'desc' });
+// Returns
+// [ { name: 'canada', 'code': 'ca', 'area': 9984670},
+//   { name: 'canada', 'code': 'ca', 'area': 9984670},
+//   ...
+// ]
+
+```
+
 ### Running tests
 
 You can run the tests and check the functionality of this module using:
@@ -123,5 +153,5 @@ $ npm install && npm test
 
 ### License
 
-Copyright © 2023, [Juan Convers](https://juanconvers.com).
+Copyright © 2024, [Juan Convers](https://www.juanconvers.com).
 Released under the [MIT License](LICENSE).

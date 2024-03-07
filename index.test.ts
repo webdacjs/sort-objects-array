@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
 
 // Modules loaded for testing.
-const sortObjectsArray = require('./index.js')
+import sortObjectsArray from './src/index'
 
 // Objects Array to test.
 const countries = [
@@ -102,4 +102,44 @@ test('Testing sorting an object by value', () => {
   expect(sortedArray[0].key).toBe('canada')
   expect(countriesObj.canada).toBe(9984670)
   expect(Object.keys(countriesObj).length).toBe(sortedArray.length)
+})
+
+
+test('Testing sorting repeated fields', () => {
+  expect.assertions(5)
+  const sortedArray = sortObjectsArray([...countries, ...countries], 'area', 'desc')
+  expect(sortedArray[0].name).toBe('canada')
+  expect(sortedArray[0].area).toBe(9984670)
+  expect(sortedArray[1].name).toBe('canada')
+  expect(sortedArray[1].area).toBe(9984670)
+  expect([...countries, ...countries].length).toBe(sortedArray.length)
+})
+
+
+test('Testing sorting array of arrays', () => {
+  expect.assertions(5)
+  const sortedArray = sortObjectsArray([countries, countries], 'area',  { flatten: true, order: 'desc' })
+  expect(sortedArray[0].name).toBe('canada')
+  expect(sortedArray[0].area).toBe(9984670)
+  expect(sortedArray[1].name).toBe('canada')
+  expect(sortedArray[1].area).toBe(9984670)
+  expect([...countries, ...countries].length).toBe(sortedArray.length)
+})
+
+test('Testing sorting array of arrays', () => {
+  expect.assertions(5)
+  const sortedArray = sortObjectsArray([countries, countries], 'area',  { order: 'desc' })
+  expect(sortedArray[0][0].name).toBe('canada')
+  expect(sortedArray[0][0].area).toBe(9984670)
+  expect(sortedArray[1][0].name).toBe('canada')
+  expect(sortedArray[1][0].area).toBe(9984670)
+  expect([countries, countries].length).toBe(sortedArray.length)
+})
+
+test('Testing sorting array of arrays ommiting config object', () => {
+  expect.assertions(3)
+  const sortedArray = sortObjectsArray([countries, countries], 'name')
+  expect(sortedArray[0][0].name).toBe('Argentina')
+  expect(sortedArray[1][0].name).toBe('Argentina')
+  expect([countries, countries].length).toBe(sortedArray.length)
 })
