@@ -23,7 +23,7 @@
   ],
   "tsup": {
     "dts": true,
-    "bundle": false,
+    "bundle": true,
     "treeshake": true,
     "target": "node18",
     "format": [
@@ -31,7 +31,7 @@
       "cjs"
     ],
     "entry": [
-      "src/**/*.ts"
+      "src/index.ts"
     ]
   },
   "repository": {
@@ -42,8 +42,7 @@
     "sort",
     "array",
     "object",
-    "order",
-    "sort"
+    "order"
   ],
   "author": "Juan Convers",
   "license": "MIT",
