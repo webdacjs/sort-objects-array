@@ -1,22 +1,38 @@
 {
   "name": "sort-objects-array",
+  "version": "3.0.4",
+  "description": "Simple module to sort an array of objects by a property without mutating the original array.",
+  "scripts": {
+    "build": "tsup src/index.ts",
+    "dev": "tsup --watch",
+    "test": "vitest"
+  },
+  "type": "module",
   "exports": {
     ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
-    }
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
   },
   "files": [
     "dist",
     "README.md",
     "LICENSE"
   ],
-  "version": "3.0.1",
-  "description": "Simple module to sort an array of objects by a property without mutating the original array.",
-  "scripts": {
-    "test": "vitest",
-    "build": "tsup src/index.ts --format cjs,esm --dts"
+  "tsup": {
+    "dts": true,
+    "bundle": true,
+    "treeshake": true,
+    "target": "node18",
+    "format": [
+      "esm",
+      "cjs"
+    ],
+    "entry": [
+      "src/index.ts"
+    ]
   },
   "repository": {
     "type": "git",
@@ -26,8 +42,7 @@
     "sort",
     "array",
     "object",
-    "order",
-    "sort"
+    "order"
   ],
   "author": "Juan Convers",
   "license": "MIT",
