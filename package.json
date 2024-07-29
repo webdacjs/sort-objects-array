@@ -1,6 +1,6 @@
 {
   "name": "sort-objects-array",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Simple module to sort an array of objects by a property without mutating the original array.",
   "scripts": {
     "build": "tsup src/index.ts",
