@@ -2,17 +2,14 @@
   "name": "sort-objects-array",
   "version": "3.0.4",
   "description": "Simple module to sort an array of objects by a property without mutating the original array.",
-  "scripts": {
-    "build": "tsup src/index.ts",
-    "dev": "tsup --watch",
-    "test": "vitest"
-  },
   "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/esm/index.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/esm/index.js",
+      "require": "./dist/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -21,17 +18,22 @@
     "README.md",
     "LICENSE"
   ],
+  "scripts": {
+    "build": "tsup src/index.ts",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "prepare": "npm run build"
+  },
   "tsup": {
-    "dts": true,
-    "bundle": true,
-    "treeshake": true,
-    "target": "node18",
-    "format": [
-      "esm",
-      "cjs"
-    ],
     "entry": [
       "src/index.ts"
+    ],
+    "dts": true,
+    "legacyOutput": true,
+    "splitting": false,
+    "format": [
+      "cjs",
+      "esm"
     ]
   },
   "repository": {
