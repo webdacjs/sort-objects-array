@@ -1,9 +1,18 @@
-# Dependencies
-node_modules/
+# Source
+src/
+test/
 
-# Build output
-dist/
-coverage/
+# Config files
+.github/
+tsconfig*.json
+vitest.config.ts
+.prettierrc
+.eslintrc
+
+# Build tools
+.travis.yml
+.gitlab-ci.yml
+.github/workflows/
 
 # Logs
 logs

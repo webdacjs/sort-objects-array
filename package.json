@@ -2,51 +2,60 @@
   "name": "sort-objects-array",
   "version": "3.0.6",
   "description": "Simple module to sort an array of objects by a property without mutating the original array.",
-  "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/esm/index.js",
+  "main": "./dist/index.js",         
+  "module": "./dist/index.mjs",      
+  "types": "./dist/index.d.ts",      
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
   "files": [
     "dist",
-    "README.md",
-    "LICENSE"
+    "LICENSE",
+    "README.md"
   ],
   "scripts": {
-    "build": "tsup src/index.ts",
-    "dev": "tsup --watch",
-    "test": "vitest",
-    "prepare": "npm run build"
-  },
-  "tsup": {
-    "entry": [
-      "src/index.ts"
-    ],
-    "dts": true,
-    "legacyOutput": true,
-    "splitting": false,
-    "format": [
-      "cjs",
-      "esm"
-    ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/webdacjs/sort-objects-array.git"
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:integration": "npm run build && npm run test:integration:cjs && npm run test:integration:esm",
+    "test:integration:cjs": "cd test/.integration/cjs && node test.cjs",
+    "test:integration:esm": "cd test/.integration/esm && node test.mjs",
+    "lint": "eslint --ext .ts src/",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint && npm run test:integration"
   },
   "keywords": [
-    "sort",
-    "array",
-    "object",
-    "order"
+    "hello",
+    "world",
+    "typescript",
+    "esm",
+    "cjs"
   ],
-  "author": "Juan Convers",
+  "author": "Your Name <your.email@example.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/webdacjs/sort-objects-array/issues"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/hello-world-dual-module.git"
   },
-  "homepage": "https://github.com/webdacjs/sort-objects-array#readme",
   "devDependencies": {
-    "tsup": "^8.0.2",
-    "typescript": "^5.3.3",
-    "vitest": "^1.3.1"
+    "@types/node": "^20.9.0",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "@vitest/coverage-v8": "^3.1.2",
+    "eslint": "^8.53.0",
+    "prettier": "^3.0.3",
+    "rimraf": "^5.0.5",
+    "tsup": "^8.4.0",
+    "typescript": "^5.2.2",
+    "vitest": "^3.1.2"
+  },
+  "engines": {
+    "node": ">=14.16"
   }
 }

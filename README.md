@@ -2,7 +2,7 @@
 
 This tiny and fast module performs the sort of an Array of objects with the property required. The module returns a new copy of the array so the original is not mutated. The module even supports the sort objects (but they get transformed into an array of objects first)
 
-This module only has dev dependencies (`vitest`, `tsup`, `typescript`) to run the tests and develop in TS.g
+This module only has dev dependencies (`vitest`, `tsup`, `typescript`) to run the tests and develop in ts.
 
 ## Install
 
@@ -15,31 +15,39 @@ $ npm install --save sort-objects-array
 
 The module requires two parameters: The array to sort and the property to use in the sorting:
 
-```js
-
+```ts
 // Example1: Sorting the countries by the name
 
-const sortObjectsArray = require('sort-objects-array');
-const countries = [{'name': 'Colombia', 'code': 'co', 'area': 1197411},
-                   {'name': 'Argentina', 'code': 'ar', 'area': 2766890},
-                   {'name': 'Brasil', 'code': 'br', 'area': 8511965},
-                   {'name': 'canada', 'code': 'ca', 'area': 9984670}]
+import { sortObjArr } from 'sort-objects-array';
 
-sortObjectsArray(countries, 'name');
+interface Country {
+    name: string;
+    code: string;
+    area: number;
+}
+
+const countries: Country[] = [
+    { name: 'Colombia', code: 'co', area: 1197411 },
+    { name: 'Argentina', code: 'ar', area: 2766890 },
+    { name: 'Brasil', code: 'br', area: 8511965 },
+    { name: 'canada', code: 'ca', area: 9984670 }
+];
+
+sortObjArr(countries, 'name');
 // Returns
 // [ { name: 'Argentina', code: 'ar', area: 2766890 },
 //   { name: 'Brasil', code: 'br', area: 8511965 },
 //   { name: 'Colombia', code: 'co', area: 1197411 },
-//   { name: 'canada', 'code': 'ca', 'area': 9984670} ]
+//   { name: 'canada', code: 'ca', area: 9984670 } ]
 ```
 
 The default order is **ascending** but it's possible to change the order to descending using *'desc'* or *'reverse'* keyword as a third parameter:
 
-```js
+```ts
 
 // Example2: Sorting the countries by the largest area
 
-sortObjectsArray(countries, 'area', 'desc');
+sortObjArr(countries, 'area', 'desc');
 // Returns
 // [ { name: 'canada', 'code': 'ca', 'area': 9984670},
 //   { name: 'Brasil', code: 'br', area: 8511965 },
@@ -50,9 +58,9 @@ sortObjectsArray(countries, 'area', 'desc');
 If you prefer you can pass the order as a configuration object using the **order**
 property:
 
-```js
+```ts
 // Example3: Sorting the countries by the largest area using config object.
-sortObjectsArray(countries, 'area', {order: 'desc'});
+sortObjArr(countries, 'area', {order: 'desc'});
 // Returns
 // [ { name: 'canada', 'code': 'ca', 'area': 9984670},
 //   { name: 'Brasil', code: 'br', area: 8511965 },
@@ -62,11 +70,11 @@ sortObjectsArray(countries, 'area', {order: 'desc'});
 
 By default, the module respects the case sensitivity of the values. If you want to override it and ignore it you can pass the flag ***caseinsensitive*** in the configuration object.
 
-```js
+```ts
 
 // Example4: Sorting by name. Case insensitive
 
-sortObjectsArray(countries, 'name', {caseinsensitive: true});
+sortObjArr(countries, 'name', {caseinsensitive: true});
 // Returns
 // [ { name: 'Argentina', code: 'ar', area: 2766890 },
 //   { name: 'Brasil', code: 'br', area: 8511965 },
@@ -76,11 +84,11 @@ sortObjectsArray(countries, 'name', {caseinsensitive: true});
 ```
 Or both:
 
-```js
+```ts
 
 // Example5: Sorting by name desc and case insensitive
 
-sortObjectsArray(countries, 'name', {order: 'desc', caseinsensitive: true});
+sortObjArr(countries, 'name', {order: 'desc', caseinsensitive: true});
 // Returns
 // [ { name: 'Colombia', code: 'co', area: 1197411 },
 //   { name: 'canada', 'code': 'ca', 'area': 9984670},
@@ -91,7 +99,7 @@ sortObjectsArray(countries, 'name', {order: 'desc', caseinsensitive: true});
 
 It can also sort objects, converting them first to an array of objects using 'key' and 'value' in each item:
 
-```js
+```ts
 
 // Example6: Sorting by an object by value
 
@@ -103,7 +111,7 @@ const countriesObj = {
     Brasil: 8511965
 }
 
-sortObjectsArray(countriesObj, 'value', {order: 'desc'});
+sortObjArr(countriesObj, 'value', {order: 'desc'});
 // Returns
 // [ { key: 'canada', value: 9984670 },
 //   { key: 'Brasil', value: 8511965 },
@@ -115,7 +123,7 @@ sortObjectsArray(countriesObj, 'value', {order: 'desc'});
 
 Finally it can also sort an array of arrays, flattening or not based on your needs:
 
-```js
+```ts
 
 // Example7: Sorting the countries im an array of arrays
 
@@ -126,7 +134,7 @@ const countries = [{'name': 'Colombia', 'code': 'co', 'area': 1197411},
 
 const countriesCountries = [countries, countries]
 
-sortObjectsArray(countriesCountries, 'name');
+sortObjArr(countriesCountries, 'name');
 // Returns
 // [ [{ name: 'Argentina', code: 'ar', area: 2766890 }, ...],
 //   [{ name: 'Argentina', code: 'ar', area: 2766890 }, ...]
@@ -134,7 +142,7 @@ sortObjectsArray(countriesCountries, 'name');
 
 // Example8: Sorting the countries im an array of arrays flattening them
 
-sortObjectsArray(countriesCountries, 'area', { flatten: true, order: 'desc' });
+sortObjArr(countriesCountries, 'area', { flatten: true, order: 'desc' });
 // Returns
 // [ { name: 'canada', 'code': 'ca', 'area': 9984670},
 //   { name: 'canada', 'code': 'ca', 'area': 9984670},
@@ -143,15 +151,38 @@ sortObjectsArray(countriesCountries, 'area', { flatten: true, order: 'desc' });
 
 ```
 
-### Running tests
+## Development
 
-You can run the tests and check the functionality of this module using:
-
-```sh
-$ npm install && npm test
+### Building
+```bash
+npm run build
 ```
+
+### Testing
+```bash
+# Run unit tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run integration tests (verifies both CJS and ESM compatibility)
+npm run test:integration
+```
+
+## Why This Package Has Dual Module Support
+
+This package is configured to work seamlessly with both CommonJS and ES Modules:
+
+- **CommonJS**: The traditional Node.js module format using `require()`
+- **ES Modules**: The standard JavaScript module format using `import/export`
+
+This dual compatibility ensures the package can be used in any project, regardless of which module system it uses.
 
 ### License
 
-Copyright © 2024, [Juan Convers](https://www.juanconvers.com).
+Copyright © 2025, [Juan Convers](https://www.juanconvers.com).
 Released under the [MIT License](LICENSE).
