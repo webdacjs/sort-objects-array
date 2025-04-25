@@ -10,7 +10,7 @@ export interface configParams {
 export interface SortObjectsArrayParams {
   valueToSort: any;
   key: string;
-  orderOrConfig?: string | configParams;
+  orderOrConfig?: string | configParams | undefined;
 }
 
 interface KeyValue {
@@ -123,8 +123,7 @@ function getSortOrder(params: string | { order?: string }): string | undefined {
   if (isString(params) && descwords.indexOf(String(params)) > -1) {
     return 'desc';
   }
-  // @ts-ignore
-  else if (isObject(params) && descwords.indexOf(String(params.order)) > -1) {
+  else if (isObject(params) && params !== null && descwords.indexOf(String((params as { order?: string }).order)) > -1) {
     return 'desc';
   }
   return undefined;
@@ -135,8 +134,8 @@ function getSortOrder(params: string | { order?: string }): string | undefined {
  * @param params - The configuration parameters.
  * @returns The case sensitivity.
  */
-const getCaseSensitivity = (params: { caseinsensitive?: boolean }): boolean =>
-  isObject(params) && params.caseinsensitive ? true : false;
+const getCaseSensitivity = (params: { caseinsensitive?: boolean } | null | undefined): boolean =>
+  params && isObject(params) ? params.caseinsensitive ?? false : false;
 
 /**
  * Sorts an array of key-value pairs based on the key and order or configuration parameters.
