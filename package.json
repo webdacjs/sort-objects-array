@@ -37,11 +37,12 @@
     "esm",
     "cjs"
   ],
-  "author": "Your Name <your.email@example.com>",
+  "author": "Juan Convers",
+  "homepage": "https://github.com/webdacjs/sort-objects-array#readme",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/hello-world-dual-module.git"
+    "url": "https://github.com/webdacjs/sort-objects-array.git"
   },
   "devDependencies": {
     "@types/node": "^20.9.0",
