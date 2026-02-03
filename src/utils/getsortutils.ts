@@ -72,8 +72,11 @@ function getSortArray(order: string): number[] {
  * @param key - The key to sort by.
  * @returns The sort function.
  */
-function getSortFunctionInsensitive(i: number[], key: string): (a: KeyValue, b: KeyValue) => number {
-  return function(a, b) {
+function getSortFunctionInsensitive(
+  i: number[],
+  key: string
+): (a: KeyValue, b: KeyValue) => number {
+  return function (a, b) {
     const aVal = getLowerCaseValue(a[key]);
     const bVal = getLowerCaseValue(b[key]);
     if (aVal < bVal) {
@@ -92,10 +95,9 @@ function getSortFunctionInsensitive(i: number[], key: string): (a: KeyValue, b: 
  * @param key - The key to sort by.
  * @returns The sort function.
  */
-const getSortFunctionStandard = (
-  i: number[],
-  key: string
-): ((a: KeyValue, b: KeyValue) => number) => (a, b) =>
+const getSortFunctionStandard =
+  (i: number[], key: string): ((a: KeyValue, b: KeyValue) => number) =>
+  (a, b) =>
     a[key] < b[key] ? i[0] : b[key] < a[key] ? i[1] : i[2];
 
 /**
@@ -122,8 +124,11 @@ const getSortFunction = (
 function getSortOrder(params: string | { order?: string }): string | undefined {
   if (isString(params) && descwords.indexOf(String(params)) > -1) {
     return 'desc';
-  }
-  else if (isObject(params) && params !== null && descwords.indexOf(String((params as { order?: string }).order)) > -1) {
+  } else if (
+    isObject(params) &&
+    params !== null &&
+    descwords.indexOf(String((params as { order?: string }).order)) > -1
+  ) {
     return 'desc';
   }
   return undefined;
@@ -135,10 +140,11 @@ function getSortOrder(params: string | { order?: string }): string | undefined {
  * @returns The case sensitivity.
  */
 const getCaseSensitivity = (params: { caseinsensitive?: boolean } | null | undefined): boolean =>
-  params && isObject(params) ? params.caseinsensitive ?? false : false;
+  params && typeof params === 'object' ? (params.caseinsensitive ?? false) : false;
 
 /**
  * Sorts an array of key-value pairs based on the key and order or configuration parameters.
+ * Uses Schwartzian transform for performance.
  * @param arrayToSort - The array to sort.
  * @param key - The key to sort by.
  * @param orderOrConfig - The sort order or configuration parameters.
@@ -149,12 +155,40 @@ export function getSortedArray(
   key: string,
   orderOrConfig: string | { order?: string; caseinsensitive?: boolean }
 ): KeyValue[] {
-
-  // @ts-ignore
-  const keySensitivity = getCaseSensitivity(orderOrConfig)
+  const keySensitivity =
+    typeof orderOrConfig === 'object' && orderOrConfig !== null
+      ? getCaseSensitivity(orderOrConfig)
+      : false;
   const order = getSortOrder(orderOrConfig) || '';
 
-  const sortFunction = getSortFunction(order, key, keySensitivity);
+  // Filter items that have the key (not null/undefined)
+  const filtered = arrayToSort.filter((x) => x[key] !== undefined && x[key] !== null);
 
-  return arrayToSort.filter(x => x[key]).sort(sortFunction);
+  // Precompute sort keys
+  const sortKey = (item: KeyValue) => {
+    const value = item[key];
+    if (keySensitivity && typeof value === 'string') {
+      return value.toLowerCase();
+    }
+    return value;
+  };
+
+  // Decorate
+  const decorated = filtered.map((item) => ({
+    item,
+    sortValue: sortKey(item),
+  }));
+
+  // Sort
+  const direction = order === 'desc' || order === 'reverse' ? -1 : 1;
+  decorated.sort((a, b) => {
+    if (a.sortValue == null) return 1;
+    if (b.sortValue == null) return -1;
+    if (a.sortValue < b.sortValue) return -1 * direction;
+    if (a.sortValue > b.sortValue) return 1 * direction;
+    return 0;
+  });
+
+  // Undecorate
+  return decorated.map((d) => d.item);
 }

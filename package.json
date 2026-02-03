@@ -1,16 +1,19 @@
 {
   "name": "sort-objects-array",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "Simple module to sort an array of objects by a property without mutating the original array.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
+  "sideEffects": false,
   "files": [
     "dist",
     "LICENSE",
@@ -27,8 +30,9 @@
     "test:integration:esm": "cd test/.integration/esm && node test.mjs",
     "lint": "eslint --ext .ts src/",
     "format": "prettier --write \"src/**/*.ts\"",
+    "benchmark": "npm run build && tsx benchmark/basic.bench.ts",
     "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint && npm run test:integration"
+    "prepublishOnly": "npm test && npm run test:integration"
   },
   "keywords": [
     "sort",
@@ -53,9 +57,13 @@
     "rimraf": "^5.0.5",
     "tsup": "^8.4.0",
     "typescript": "^5.2.2",
-    "vitest": "^3.1.2"
+    "vitest": "^3.1.2",
+    "tsx": "^4.7.0"
+  },
+  "bugs": {
+    "url": "https://github.com/webdacjs/sort-objects-array/issues"
   },
   "engines": {
-    "node": ">=14.16"
+    "node": ">=18.0.0"
   }
 }
