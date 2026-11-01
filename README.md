@@ -173,6 +173,24 @@ npm run test:coverage
 npm run test:integration
 ```
 
+### Releasing
+
+Publishing to npm is automated with GitHub Actions ([`.github/workflows/publish.yml`](.github/workflows/publish.yml)). Pushing a version tag (for example `v5.0.2`) runs lint, build and tests, then publishes the package with npm provenance.
+
+```bash
+# Bump the version (patch, minor or major), commit it, and create the tag
+npm version patch
+
+# Push the commit and the tag together
+git push origin master --follow-tags
+```
+
+Notes:
+
+- The tagged commit must be on `master`, and the tag must match the version in `package.json`, or the workflow stops without publishing.
+- A plain `git push` does not push tags. Use `--follow-tags`, or push the tag on its own with `git push origin v5.0.2`.
+- Publishing uses npm [trusted publishing](https://docs.npmjs.com/trusted-publishers), so no npm token is stored in GitHub. The trusted publisher is configured on npmjs.com under the package's Settings.
+
 ## Why This Package Has Dual Module Support
 
 This package is configured to work seamlessly with both CommonJS and ES Modules:
