@@ -1,6 +1,6 @@
 {
   "name": "sort-objects-array",
-  "version": "4.1.0",
+  "version": "5.0.0",
   "description": "Simple module to sort an array of objects by a property without mutating the original array.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -20,7 +20,7 @@
     "README.md"
   ],
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
     "build": "npm run clean && tsup",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -28,7 +28,7 @@
     "test:integration": "npm run build && npm run test:integration:cjs && npm run test:integration:esm",
     "test:integration:cjs": "cd test/.integration/cjs && node test.cjs",
     "test:integration:esm": "cd test/.integration/esm && node test.mjs",
-    "lint": "eslint --ext .ts src/",
+    "lint": "eslint src/",
     "format": "prettier --write \"src/**/*.ts\"",
     "benchmark": "npm run build && tsx benchmark/basic.bench.ts",
     "prepare": "npm run build",
@@ -48,22 +48,24 @@
     "url": "https://github.com/webdacjs/sort-objects-array.git"
   },
   "devDependencies": {
-    "@types/node": "^20.9.0",
-    "@typescript-eslint/eslint-plugin": "^6.10.0",
-    "@typescript-eslint/parser": "^6.10.0",
-    "@vitest/coverage-v8": "^3.1.2",
-    "eslint": "^8.53.0",
-    "prettier": "^3.0.3",
-    "rimraf": "^5.0.5",
-    "tsup": "^8.4.0",
-    "typescript": "^5.2.2",
-    "vitest": "^3.1.2",
-    "tsx": "^4.7.0"
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^22.20.5",
+    "@vitest/coverage-v8": "^5.0.5",
+    "eslint": "^10.14.0",
+    "prettier": "^3.9.10",
+    "tsup": "^9.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.72.1",
+    "vitest": "^5.0.5"
   },
   "bugs": {
     "url": "https://github.com/webdacjs/sort-objects-array/issues"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.0.0"
+  },
+  "overrides": {
+    "minimatch": "^11.0.1"
   }
 }
