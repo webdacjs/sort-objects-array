@@ -1,6 +1,6 @@
 {
   "name": "sort-objects-array",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Simple module to sort an array of objects by a property without mutating the original array.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
