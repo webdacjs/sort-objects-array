@@ -5,7 +5,7 @@
  * @returns An array of objects from the original array that are missing the specified key.
  */
 function getMissingVals(originalArray: Array<any>, key: string | number) {
-    return originalArray.filter((x: { [x: string]: any; }) => !x[key]);
+    return originalArray.filter((x: { [x: string]: any; }) => x[key] === undefined || x[key] === null);
   }
   
   /**
