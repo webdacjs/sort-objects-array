@@ -142,3 +142,12 @@ test('Testing sorting array of arrays ommiting config object', () => {
   expect(sortedArray[1][0].name).toBe('Argentina')
   expect([countries, countries].length).toBe(sortedArray.length)
 })
+// Regression: https://github.com/webdacjs/sort-objects-array/issues/36
+test('Does not duplicate objects whose sort value is falsy (0, "", false)', () => {
+  expect(sortObjArr([{ n: 2 }, { n: 0 }, { n: 1 }], 'n')).toEqual([{ n: 0 }, { n: 1 }, { n: 2 }])
+  expect(sortObjArr([{ s: 'b' }, { s: '' }, { s: 'a' }], 's')).toEqual([{ s: '' }, { s: 'a' }, { s: 'b' }])
+  expect(sortObjArr([{ b: true }, { b: false }], 'b')).toEqual([{ b: false }, { b: true }])
+  expect(sortObjArr([{ n: 0 }, { n: null }, { n: 1 }, { x: 1 }], 'n', 'desc')).toEqual([
+    { n: 1 }, { n: 0 }, { n: null }, { x: 1 },
+  ])
+})

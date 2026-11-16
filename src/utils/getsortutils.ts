@@ -32,7 +32,7 @@ export const convertObjectToArray = (val: Record<string, any>): KeyValue[] =>
  * @returns The array of missing values.
  */
 const getMissingValues = (originalArray: KeyValue[], key: string): KeyValue[] =>
-  originalArray.filter((x) => !x[key]);
+  originalArray.filter((x) => x[key] === undefined || x[key] === null);
 
 /**
  * Injects missing values into a sorted array.
